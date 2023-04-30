@@ -44,6 +44,19 @@ userSchema.virtual("friendCount").get(function () {
   return this.friends.length;
 });
 
+// bonus.. remove user associated thoughts when deleted
+// pre hook to findoneanddelete.  prehook asynchronous
+userSchema.pre(
+  "findOneAndDelete",
+  { document: false, query: true },
+  async function () {
+    console.log("user before delete");
+    const document = await this.model.findOne(this.getQuery());
+    console.log(document.username);
+    await Thought.deleteMany({ username: document.username });
+  }
+);
+
 const User = model("user", userSchema);
 
 module.exports = User;
