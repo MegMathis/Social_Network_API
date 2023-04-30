@@ -45,7 +45,7 @@ const userController = {
 
   // put to update a user by its _id,
   updateUser({ params, body }, res) {
-    User.findOneAndUpdate({ _id: params.id }, body, {
+    User.findOneAndUpdate({ _id: params.userId }, body, {
       new: true,
       runValidators: true,
     })
