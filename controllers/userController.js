@@ -61,6 +61,19 @@ const userController = {
       });
   },
 
+  // delete to remove user by its _id
+  deleteUser({ params }, res) {
+    User.findOneAndDelete({ _id: params.userId })
+      .then((userData) => {
+        if (!userData) {
+          res.status(404).json({ message: "User not found with this id" });
+          return;
+        }
+        res.json(userData);
+      })
+      .catch((err) => res.status(400).json(err));
+  },
+
   addFriend({ params, body }, res) {
     User.findOneAndUpdate(
       { _id: params.userId },
