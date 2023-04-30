@@ -23,7 +23,7 @@ router.route("/").get(getAllThoughts).post(addThought);
 
 // /api/thoughts/:id - getThoughtById, updateThought, and deleteThought
 router
-  .route("/:thoughtid")
+  .route("/:thoughtId")
   .get(getThoughtsById)
   .put(updateThought)
   .delete(deleteThought);

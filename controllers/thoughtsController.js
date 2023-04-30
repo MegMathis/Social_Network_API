@@ -11,9 +11,9 @@ const { Thought, User } = require("../models");
 const thoughtController = {
   getAllThoughts(req, res) {
     Thought.find({})
-      .populate({
-        path: "thoughts",
-      })
+      // .populate({
+      //   path: "thoughts",
+      // })
       .sort({ _id: -1 })
       .then((thoughtData) => res.json(thoughtData))
       .catch((err) => {
@@ -23,9 +23,10 @@ const thoughtController = {
 
   getThoughtsById({ params }, res) {
     Thought.findOne({ _id: params.thoughtId })
-      .populate({
-        path: "thoughts",
-      })
+      // .select("-__v")
+      // .populate({
+      //   path: "thoughts",
+      // })
       .then((thoughtData) => {
         if (!thoughtData) {
           res.status(404).json({ message: "No thought found with that id" });
@@ -43,7 +44,7 @@ const thoughtController = {
       .then(({ _id }) => {
         console.log(_id);
         return User.findOneAndUpdate(
-          { _id: params.userId },
+          { _id: body.userId },
           { $push: { thoughts: _id } },
           { new: true }
         );
