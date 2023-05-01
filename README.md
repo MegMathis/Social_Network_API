@@ -103,6 +103,8 @@ https://momentjs.com/docs/
 
 https://mongoosejs.com/docs/models.html#compiling
 
+18-NoSQL activities and Mini Challenge
+
 ## Contribution
 
 Megan Mathis
